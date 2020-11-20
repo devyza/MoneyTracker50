@@ -13,7 +13,7 @@ import java.util.Calendar;
 
 public class SaveActivity extends AppCompatActivity {
 
-    EditText txtDescription, txtDate, txtAmount;
+    EditText edtDescription, edtDate, edtAmount;
     Button btnCancel, btnSave;
     DatePickerDialog datePickerDialog;
 
@@ -23,14 +23,14 @@ public class SaveActivity extends AppCompatActivity {
         setContentView(R.layout.activity_save);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        txtDescription = (EditText)findViewById(R.id.txtDescription);
-        txtDate = (EditText)findViewById(R.id.txtDate);
-        txtAmount = (EditText)findViewById(R.id.txtAmount);
+        edtDescription = (EditText)findViewById(R.id.edtDescription);
+        edtDate = (EditText)findViewById(R.id.edtDate);
+        edtAmount = (EditText)findViewById(R.id.edtAmount);
         btnCancel = (Button)findViewById(R.id.btnCancle);
         btnSave = (Button)findViewById(R.id.btnSave);
 
-        txtDate.setShowSoftInputOnFocus(false);
-        txtDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        edtDate.setShowSoftInputOnFocus(false);
+        edtDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus){
@@ -42,7 +42,7 @@ public class SaveActivity extends AppCompatActivity {
                             new DatePickerDialog.OnDateSetListener(){
                                 @Override
                                 public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                    txtDate.setText(dayOfMonth + "/" + (month+1) + "/" + year);
+                                    edtDate.setText(dayOfMonth + "/" + (month+1) + "/" + year);
                                 }
                             }, year, month, day);
 
