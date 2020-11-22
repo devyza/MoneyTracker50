@@ -1,38 +1,55 @@
 package com.example.moneytracker50;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnIncome, btnExpense;
+    HomeFragment mainFragment = new HomeFragment();
+    HistoryFragment historyFragment = new HistoryFragment();
+
+    BottomNavigationView btm_nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnIncome = findViewById(R.id.btnIncome);
-        btnIncome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SaveActivity.class);
-                v.getContext().startActivity(intent);
-            }
-        });
+        // Set HomeFragment as Default
+        getSupportFragmentManager().beginTransaction().replace(
+                R.id.fragment_container, mainFragment
+        ).commit();
 
-        btnExpense = findViewById(R.id.btnExpense);
-        btnExpense.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SaveActivity.class);
-                v.getContext().startActivity(intent);
-            }
-        });
+        btm_nav = findViewById(R.id.btm_nav);
+        btm_nav.setOnNavigationItemSelectedListener(
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
 
+                    switch (item.getItemId()) {
+
+                        case R.id.action_main:
+                            selectedFragment = mainFragment;
+                            break;
+                        case R.id.action_history:
+                            selectedFragment = historyFragment;
+                            break;
+                    }
+
+                    getSupportFragmentManager().beginTransaction().replace(
+                            R.id.fragment_container, selectedFragment
+                    ).commit();
+
+                    return true;
+                }
+            }
+        );
     }
 }
