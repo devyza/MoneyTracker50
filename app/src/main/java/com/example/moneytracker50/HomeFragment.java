@@ -20,7 +20,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = (ViewGroup) inflater.inflate(R.layout.fragment_main, container, false);
+        view = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
         btnIncome = (Button) view.findViewById(R.id.btnIncome);
         btnIncome.setOnClickListener(new View.OnClickListener() {
             @Override
