@@ -1,5 +1,6 @@
 package com.example.moneytracker50;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,24 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordViewHolder> {
 
     private List<Record> recordList = new ArrayList<>();
-
-    RecordAdapter(){
-        this.recordList.add(new Record(0, "Go Shopping", new Date(), 100));
-        this.recordList.add(new Record(1, "Go to Cinema", new Date(), 2000));
-        this.recordList.add(new Record(2, "Dinner", new Date(), 50000));
-        this.recordList.add(new Record(3, "Breakfast", new Date(), 600000));
-
-        notifyDataSetChanged();
-    }
 
     @NonNull
     @Override
@@ -47,9 +37,9 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         return recordList.size();
     }
 
-
-    DecimalFormat decimalFormat = new DecimalFormat("#,###");
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    public void reload(Context context){
+        recordList = RecordDatabase.getInstance(context).recordDao().getAll();
+    }
 
     public class RecordViewHolder extends RecyclerView.ViewHolder {
 
@@ -66,8 +56,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
 
         public void bind(Record record){
             descriptionTextView.setText(record.getDescription());
-            dateTextView.setText(formatter.format(record.getDate()));
-            amountTextView.setText(decimalFormat.format(record.getAmount()));
+            dateTextView.setText(Converters.dateFormat.format(record.getDate()));
+            amountTextView.setText(Converters.moneyFormat.format(record.getAmount()));
         }
 
     }

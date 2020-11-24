@@ -11,6 +11,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    RecordDatabase recordDatabase;
+
     HomeFragment mainFragment = new HomeFragment();
     HistoryFragment historyFragment = new HistoryFragment();
 
@@ -20,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        recordDatabase = RecordDatabase.getInstance(getApplicationContext());
 
         // Set HomeFragment as Default
         getSupportFragmentManager().beginTransaction().replace(

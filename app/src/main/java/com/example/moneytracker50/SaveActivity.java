@@ -8,11 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.Calendar;
 
 public class SaveActivity extends AppCompatActivity {
 
+    RecordDatabase database;
     EditText edtDescription, edtDate, edtAmount;
     Button btnCancel, btnSave;
     DatePickerDialog datePickerDialog;
@@ -22,6 +25,8 @@ public class SaveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        database = RecordDatabase.getInstance(SaveActivity.this);
 
         edtDescription = (EditText)findViewById(R.id.edtDescription);
         edtDate = (EditText)findViewById(R.id.edtDate);
@@ -50,5 +55,24 @@ public class SaveActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Record record = null;
+                try {
+                        record = new Record(
+                                edtDescription.getText().toString(),
+                                Converters.dateFormat.parse(edtDate.getText().toString()),
+                                Integer.parseInt(edtAmount.getText().toString())
+                    );
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                database.recordDao().addRecord(record);
+                Toast.makeText(SaveActivity.this, "Saving Completed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }
