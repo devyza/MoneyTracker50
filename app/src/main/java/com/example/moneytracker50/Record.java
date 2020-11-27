@@ -22,18 +22,31 @@ public class Record {
     @ColumnInfo(name = "amount")
     private int amount;
 
-    public Record(int id, String description, Date date, int amount){
+    @ColumnInfo(name = "category_id")
+    private int category_id;
+
+    public Record(int id, String description, Date date, int amount, int category_id){
         this.id = id;
         this.description = description;
         this.date = date;
         this.amount = amount;
+        this.category_id = category_id;
     }
 
     @Ignore
-    public Record(String description, Date date, int amount) {
+    public Record(String description, Date date, int amount, Category category){
         this.description = description;
         this.date = date;
         this.amount = amount;
+        this.category_id = category.getId();
+    }
+
+    @Ignore
+    public Record(String description, Date date, int amount, int category_id) {
+        this.description = description;
+        this.date = date;
+        this.amount = amount;
+        this.category_id = category_id;
     }
 
     public int getId() {
@@ -52,6 +65,8 @@ public class Record {
         return amount;
     }
 
+    public int getCategory_id(){return category_id;}
+
     public void setId(int id){ this.id = id;}
 
     public void setDescription(String description) {
@@ -65,4 +80,6 @@ public class Record {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    public void setCategory_id(int category_id){this.category_id = category_id;}
 }

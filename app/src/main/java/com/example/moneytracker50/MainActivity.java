@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recordDatabase = RecordDatabase.getInstance(getApplicationContext());
+        if (recordDatabase.categoryDao().getTotal() == 0) insertDefaultCategory();
 
         // Set HomeFragment as Default
         getSupportFragmentManager().beginTransaction().replace(
@@ -56,4 +57,15 @@ public class MainActivity extends AppCompatActivity {
             }
         );
     }
+
+    void insertDefaultCategory(){
+        String []category = {
+                "None", "Cloth", "Debt", "Entertainment", "Food",
+                "Housing", "Medical/Healthcare", "Transportation", "Utilities"
+        };
+
+        for (String i : category)
+            recordDatabase.categoryDao().addCategory(new Category(i));
+    }
+
 }

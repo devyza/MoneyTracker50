@@ -44,7 +44,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
     public class RecordViewHolder extends RecyclerView.ViewHolder {
 
         public LinearLayout containerView;
-        public TextView descriptionTextView, dateTextView, amountTextView;
+        public TextView descriptionTextView, dateTextView, amountTextView, categoryTextView;
 
         public RecordViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,12 +52,17 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
             descriptionTextView = itemView.findViewById(R.id.txtDescription);
             dateTextView = itemView.findViewById(R.id.txtDate);
             amountTextView = itemView.findViewById(R.id.txtAmount);
+            categoryTextView = itemView.findViewById(R.id.txtCategory);
         }
 
         public void bind(Record record){
             descriptionTextView.setText(record.getDescription());
             dateTextView.setText(Converters.dateFormat.format(record.getDate()));
             amountTextView.setText(Converters.moneyFormat.format(record.getAmount()));
+            categoryTextView.setText(RecordDatabase
+                    .getInstance(containerView.getContext())
+                    .categoryDao().getCategory(record.getCategory_id()).getName()
+            );
         }
 
     }

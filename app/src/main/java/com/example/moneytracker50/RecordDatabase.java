@@ -7,13 +7,14 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {Record.class}, version = 2)
+@Database(entities = {Record.class, Category.class}, version = 4)
 @TypeConverters({Converters.class})
 public abstract class RecordDatabase extends RoomDatabase {
 
     static RecordDatabase instance;
 
     public abstract RecordDao recordDao();
+    public abstract CategoryDao categoryDao();
 
     public static RecordDatabase getInstance(Context context){
 

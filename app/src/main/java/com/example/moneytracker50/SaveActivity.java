@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.List;
 
 public class SaveActivity extends AppCompatActivity {
 
@@ -20,6 +23,9 @@ public class SaveActivity extends AppCompatActivity {
     Button btnCancel, btnSave;
     DatePickerDialog datePickerDialog;
 
+    Spinner spnrCategory;
+    List<Category> categories;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,12 +33,19 @@ public class SaveActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         database = RecordDatabase.getInstance(SaveActivity.this);
+        categories = RecordDatabase
+                .getInstance(getApplicationContext())
+                .categoryDao().getAll();
 
         edtDescription = (EditText)findViewById(R.id.edtDescription);
         edtDate = (EditText)findViewById(R.id.edtDate);
         edtAmount = (EditText)findViewById(R.id.edtAmount);
         btnCancel = (Button)findViewById(R.id.btnCancle);
         btnSave = (Button)findViewById(R.id.btnSave);
+        spnrCategory = (Spinner)findViewById(R.id.spnr_category);
+
+        ArrayAdapter<Category> adapterCategory = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categories);
+        spnrCategory.setAdapter(adapterCategory);
 
         edtDate.setShowSoftInputOnFocus(false);
         edtDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -61,16 +74,18 @@ public class SaveActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Record record = null;
                 try {
-                        record = new Record(
-                                edtDescription.getText().toString(),
-                                Converters.dateFormat.parse(edtDate.getText().toString()),
-                                Integer.parseInt(edtAmount.getText().toString())
+                    record = new Record(
+                            edtDescription.getText().toString(),
+                            Converters.dateFormat.parse(edtDate.getText().toString()),
+                            Integer.parseInt(edtAmount.getText().toString()),
+                            database.categoryDao().getCategory(spnrCategory.getSelectedItemPosition() + 1)
                     );
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 database.recordDao().addRecord(record);
                 Toast.makeText(SaveActivity.this, "Saving Completed", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
