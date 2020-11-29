@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity(tableName = "records")
@@ -20,12 +21,12 @@ public class Record {
     private Date date;
 
     @ColumnInfo(name = "amount")
-    private int amount;
+    private BigDecimal amount;
 
     @ColumnInfo(name = "category_id")
     private int category_id;
 
-    public Record(int id, String description, Date date, int amount, int category_id){
+    public Record(int id, String description, Date date, BigDecimal amount, int category_id){
         this.id = id;
         this.description = description;
         this.date = date;
@@ -34,7 +35,7 @@ public class Record {
     }
 
     @Ignore
-    public Record(String description, Date date, int amount, Category category){
+    public Record(String description, Date date, BigDecimal amount, Category category){
         this.description = description;
         this.date = date;
         this.amount = amount;
@@ -42,7 +43,7 @@ public class Record {
     }
 
     @Ignore
-    public Record(String description, Date date, int amount, int category_id) {
+    public Record(String description, Date date, BigDecimal amount, int category_id) {
         this.description = description;
         this.date = date;
         this.amount = amount;
@@ -61,7 +62,7 @@ public class Record {
         return date;
     }
 
-    public int getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
@@ -77,7 +78,7 @@ public class Record {
         this.date = date;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

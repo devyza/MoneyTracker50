@@ -2,6 +2,7 @@ package com.example.moneytracker50;
 
 import androidx.room.TypeConverter;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,8 +19,17 @@ public class Converters {
         return date == null ? null : date.getTime();
     }
 
+    @TypeConverter
+    public static BigDecimal fromMoneyString(String value){
+        return  value == null ? null : new BigDecimal(value);
+    }
+
+    @TypeConverter
+    public static String moneyToBigDecimal(BigDecimal value){
+        return  value == null ? null : value.toString();
+    }
 
     public static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    public static DecimalFormat moneyFormat = new DecimalFormat("#,###.00");
+    public static DecimalFormat moneyFormat = new DecimalFormat("#,###.##");
 
 }

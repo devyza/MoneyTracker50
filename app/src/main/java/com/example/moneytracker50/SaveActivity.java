@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.List;
@@ -77,7 +78,7 @@ public class SaveActivity extends AppCompatActivity {
                     record = new Record(
                             edtDescription.getText().toString(),
                             Converters.dateFormat.parse(edtDate.getText().toString()),
-                            Integer.parseInt(edtAmount.getText().toString()),
+                            new BigDecimal(edtAmount.getText().toString()),
                             database.categoryDao().getCategory(spnrCategory.getSelectedItemPosition() + 1)
                     );
                 } catch (ParseException e) {
