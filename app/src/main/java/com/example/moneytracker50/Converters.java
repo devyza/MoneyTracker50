@@ -30,6 +30,6 @@ public class Converters {
     }
 
     public static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    public static DecimalFormat moneyFormat = new DecimalFormat("#,###.##");
+    public static DecimalFormat moneyFormat = new DecimalFormat("#,##0.00");
 
 }

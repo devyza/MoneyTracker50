@@ -24,9 +24,9 @@
     <Spinner
         android:id="@+id/spnr_category"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="20dp"
-        />
+        android:background="#FFE0E0E0"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -36,7 +36,8 @@
             android:id="@+id/edtDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Date"
+            android:hint="Today"
+            android:cursorVisible="false"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
