@@ -33,6 +33,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SaveActivity.class);
+                intent.putExtra("isIncome", true);
                 v.getContext().startActivity(intent);
             }
         });
@@ -42,6 +43,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SaveActivity.class);
+                intent.putExtra("isIncome", false);
                 v.getContext().startActivity(intent);
             }
         });

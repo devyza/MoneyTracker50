@@ -27,12 +27,15 @@ public class SaveActivity extends AppCompatActivity {
     Spinner spnrCategory;
     List<Category> categories;
 
+    boolean isIncome;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        isIncome = getIntent().getBooleanExtra("isIncome", true);
         database = RecordDatabase.getInstance(SaveActivity.this);
         categories = RecordDatabase
                 .getInstance(getApplicationContext())
@@ -74,11 +77,12 @@ public class SaveActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Record record = null;
+                BigDecimal sign = new BigDecimal(isIncome ? "1" : "-1");
                 try {
                     record = new Record(
                             edtDescription.getText().toString(),
                             Converters.dateFormat.parse(edtDate.getText().toString()),
-                            new BigDecimal(edtAmount.getText().toString()),
+                            new BigDecimal(edtAmount.getText().toString()).multiply(sign),
                             database.categoryDao().getCategory(spnrCategory.getSelectedItemPosition() + 1)
                     );
                 } catch (ParseException e) {
