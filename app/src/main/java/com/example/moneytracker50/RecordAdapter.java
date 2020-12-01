@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordViewHolder> {
@@ -37,8 +38,9 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         return recordList.size();
     }
 
-    public void reload(Context context){
-        recordList = RecordDatabase.getInstance(context).recordDao().getAll();
+    public void reload(Context context, Date month){
+        recordList = RecordDatabase.getInstance(context).recordDao().getRecordsByMonth(month);
+        notifyDataSetChanged();
     }
 
     public class RecordViewHolder extends RecyclerView.ViewHolder {
