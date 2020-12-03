@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     HomeFragment mainFragment = new HomeFragment();
     HistoryFragment historyFragment = new HistoryFragment();
+    AnalyticsFragment analyticsFragment = new AnalyticsFragment();
 
     BottomNavigationView btm_nav;
 
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.action_history:
                             selectedFragment = historyFragment;
                             break;
+                        case R.id.action_analytics:
+                            selectedFragment = analyticsFragment;
                     }
 
                     getSupportFragmentManager().beginTransaction().replace(
