@@ -5,7 +5,7 @@ import androidx.room.ColumnInfo;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class MontlyRecord {
+public class RecordsByMonth {
     @ColumnInfo(name = "yearMonth")
     Date yearMonth;
 
@@ -24,5 +24,9 @@ public class MontlyRecord {
 
     public void setMoney(BigDecimal money) {
         this.money = money;
+    }
+
+    public String getMonth(){
+        return Converters.monthFormat.format(getYearMonth());
     }
 }

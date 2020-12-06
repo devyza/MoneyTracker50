@@ -15,6 +15,8 @@ public abstract class RecordDatabase extends RoomDatabase {
 
     public abstract RecordDao recordDao();
     public abstract CategoryDao categoryDao();
+    public abstract RecordsByCategoryDAO recordsByCategoryDAO();
+    public abstract RecordsByMonthDAO recordsByMonthDAO();
 
     public static RecordDatabase getInstance(Context context){
 

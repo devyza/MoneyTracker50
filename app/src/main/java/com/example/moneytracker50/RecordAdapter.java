@@ -39,7 +39,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
     }
 
     public void reload(Context context, Date month){
-        recordList = RecordDatabase.getInstance(context).recordDao().getRecordsByMonth(month);
+        recordList = RecordDatabase.getInstance(context).recordsByMonthDAO().getRecordsByMonth(month);
         notifyDataSetChanged();
     }
 

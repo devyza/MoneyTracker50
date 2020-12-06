@@ -29,7 +29,7 @@ public class Converters {
         return  value == null ? null : value.toString();
     }
 
+    public static SimpleDateFormat monthFormat = new SimpleDateFormat("MMM");
     public static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     public static DecimalFormat moneyFormat = new DecimalFormat("#,##0.00");
-
 }

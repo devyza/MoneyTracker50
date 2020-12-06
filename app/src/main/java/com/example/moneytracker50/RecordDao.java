@@ -5,23 +5,11 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
 
 @Dao
 public interface RecordDao {
     @Insert
     void addRecord(Record record);
-
-    @Query ("SELECT * FROM records " +
-            "WHERE strftime('%m %Y', date/1000, 'unixepoch') = strftime('%m %Y', :date/1000, 'unixepoch') " +
-            "ORDER BY date DESC, id DESC")
-    List<Record> getRecordsByMonth(Date date);
-
-    @Query("SELECT date AS yearMonth, SUM(amount) AS money from records " +
-            "WHERE strftime('%Y', date/1000, 'unixepoch') = strftime('%Y', :year/1000, 'unixepoch')" +
-            "GROUP BY STRFTIME('%m %Y', date/1000, 'unixepoch')")
-    List<MontlyRecord> getAmountByMonth(Date year);
 
     @Query ("SELECT SUM(amount) FROM records")
     BigDecimal getAmount();

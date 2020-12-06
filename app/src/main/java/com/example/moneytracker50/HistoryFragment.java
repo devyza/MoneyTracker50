@@ -17,7 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 public class HistoryFragment extends Fragment {
 
-    private RecordDatabase recordDatabase;
     private ViewGroup view;
     private ImageButton btnNext, btnPrevious;
     private TextView txtMonth;
@@ -33,7 +32,6 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = (ViewGroup) inflater.inflate(R.layout.fragment_history, container, false);
-        recordDatabase = RecordDatabase.getInstance(view.getContext());
 
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recordAdapter = new RecordAdapter();
