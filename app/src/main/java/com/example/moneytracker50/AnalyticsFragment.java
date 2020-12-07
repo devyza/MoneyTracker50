@@ -34,6 +34,7 @@ public class AnalyticsFragment extends Fragment {
 
     View view;
     BarChart barChart;
+    BarDataSet barDataSet;
     PieDataSet pieDataSet_income, pieDataSet_expense;
     PieChart pieChart_income, pieChart_expense;
 
@@ -50,27 +51,18 @@ public class AnalyticsFragment extends Fragment {
         setupColors();
 
         barChart = view.findViewById(R.id.mp_BarChart);
-        pieChart_income = view.findViewById(R.id.mp_PieChart_income);
-        pieChart_expense = view.findViewById(R.id.mp_PieChart_expense);
-
         styleBarChart(barChart);
-        stylePieChart(pieChart_income);
-        stylePieChart(pieChart_expense);
+        barChart.invalidate();
 
-        pieDataSet_income = new PieDataSet(getPieEntries(RecordDatabase.getInstance(this.getContext()).recordsByCategoryDAO().getIncomeByMonth(calendar.getTime())), null);
-        stylePieDataSet(pieDataSet_income);
-        pieChart_income.setData(new PieData(pieDataSet_income));
+        pieChart_income = view.findViewById(R.id.mp_PieChart_income);
+        stylePieChart(pieChart_income);
         pieChart_income.invalidate();
 
-        pieDataSet_expense = new PieDataSet(getPieEntries(RecordDatabase.getInstance(this.getContext()).recordsByCategoryDAO().getExpenseByMonth(calendar.getTime())), null);
-        stylePieDataSet(pieDataSet_expense);
-        pieChart_expense.setData(new PieData(pieDataSet_expense));
+        pieChart_expense = view.findViewById(R.id.mp_PieChart_expense);
+        stylePieChart(pieChart_expense);
         pieChart_expense.invalidate();
 
-        BarDataSet barDataSet = new BarDataSet(getBarEntries(RecordDatabase.getInstance(this.getContext()).recordsByMonthDAO().getTotalByMonth(calendar.getTime())), null);
-        styleBarChart(barChart);
-        barChart.setData(new BarData(barDataSet));
-        barChart.invalidate();
+        reload();
 
         return view;
     }
@@ -148,6 +140,25 @@ public class AnalyticsFragment extends Fragment {
             colors[pos] = element;
             pos++;
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void reload(){
+
+        pieDataSet_income = new PieDataSet(getPieEntries(RecordDatabase.getInstance(this.getContext()).recordsByCategoryDAO().getIncomeByMonth(calendar.getTime())), null);
+        pieDataSet_expense = new PieDataSet(getPieEntries(RecordDatabase.getInstance(this.getContext()).recordsByCategoryDAO().getExpenseByMonth(calendar.getTime())), null);
+        barDataSet = new BarDataSet(getBarEntries(RecordDatabase.getInstance(this.getContext()).recordsByMonthDAO().getTotalByMonth(calendar.getTime())), null);
+
+        stylePieDataSet(pieDataSet_income);
+        stylePieDataSet(pieDataSet_expense);
+        styleBarChart(barChart);
+
+        pieChart_income.setData(new PieData(pieDataSet_income));
+        pieChart_income.notifyDataSetChanged();
+        pieChart_expense.setData(new PieData(pieDataSet_expense));
+        pieChart_expense.notifyDataSetChanged();
+        barChart.setData(new BarData(barDataSet));
+        barChart.notifyDataSetChanged();
     }
 }
 
