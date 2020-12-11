@@ -81,7 +81,7 @@ public class SaveActivity extends AppCompatActivity {
                 try {
                     record = new Record(
                             edtDescription.getText().toString(),
-                            Converters.dateFormat.parse(edtDate.getText().toString()),
+                            Formatter.parseDate(edtDate.getText().toString()),
                             new BigDecimal(edtAmount.getText().toString()).multiply(sign),
                             database.categoryDao().getCategory(spnrCategory.getSelectedItemPosition() + 1)
                     );

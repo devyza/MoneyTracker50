@@ -20,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
     final AnalyticsFragment analyticsFragment = new AnalyticsFragment();
 
     Fragment selectedFragment = mainFragment;
-
-
     BottomNavigationView btm_nav;
 
     @Override
@@ -38,31 +36,31 @@ public class MainActivity extends AppCompatActivity {
 
         btm_nav = findViewById(R.id.btm_nav);
         btm_nav.setOnNavigationItemSelectedListener(
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.action_main:
-                            fragmentManager.beginTransaction().hide(selectedFragment).show(mainFragment).commit();
-                            selectedFragment = mainFragment;
-                            return true;
-                        case R.id.action_history:
-                            fragmentManager.beginTransaction().hide(selectedFragment).show(historyFragment).commit();
-                            selectedFragment = historyFragment;
-                            return true;
-                        case R.id.action_analytics:
-                            fragmentManager.beginTransaction().hide(selectedFragment).show(analyticsFragment).commit();
-                            selectedFragment = analyticsFragment;
-                            return true;
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.action_main:
+                                fragmentManager.beginTransaction().hide(selectedFragment).show(mainFragment).commit();
+                                selectedFragment = mainFragment;
+                                return true;
+                            case R.id.action_history:
+                                fragmentManager.beginTransaction().hide(selectedFragment).show(historyFragment).commit();
+                                selectedFragment = historyFragment;
+                                return true;
+                            case R.id.action_analytics:
+                                fragmentManager.beginTransaction().hide(selectedFragment).show(analyticsFragment).commit();
+                                selectedFragment = analyticsFragment;
+                                return true;
+                        }
+                        return false;
                     }
-                    return false;
                 }
-            }
         );
     }
 
-    void insertDefaultCategory(){
-        String []category = {
+    void insertDefaultCategory() {
+        String[] category = {
                 "None", "Cloth", "Debt", "Entertainment", "Food",
                 "Housing", "Medical/Healthcare", "Transportation", "Utilities"
         };

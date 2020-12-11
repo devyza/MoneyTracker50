@@ -38,8 +38,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         return recordList.size();
     }
 
-    public void reload(Context context, Date month){
-        recordList = RecordDatabase.getInstance(context).recordsByMonthDAO().getRecordsByMonth(month);
+    public void reload(Context context, Date month) {
+        recordList = RecordDatabase.getInstance(context).recordsByDateDao().getRecordsByMonth(month);
         notifyDataSetChanged();
     }
 
@@ -57,10 +57,10 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
             categoryTextView = itemView.findViewById(R.id.txtCategory);
         }
 
-        public void bind(Record record){
+        public void bind(Record record) {
             descriptionTextView.setText(record.getDescription());
-            dateTextView.setText(Converters.dateFormat.format(record.getDate()));
-            amountTextView.setText(Converters.moneyFormat.format(record.getAmount()));
+            dateTextView.setText(Formatter.formatDate(record.getDate()));
+            amountTextView.setText(Formatter.formatMoney(record.getAmount()));
             categoryTextView.setText(RecordDatabase
                     .getInstance(containerView.getContext())
                     .categoryDao().getCategory(record.getCategory_id()).getName()

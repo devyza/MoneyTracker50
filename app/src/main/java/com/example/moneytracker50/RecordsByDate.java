@@ -5,28 +5,24 @@ import androidx.room.ColumnInfo;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class RecordsByMonth {
-    @ColumnInfo(name = "yearMonth")
-    Date yearMonth;
+public class RecordsByDate {
+    @ColumnInfo(name = "date")
+    Date date;
 
     @ColumnInfo(name = "money")
     BigDecimal money;
 
     public Date getYearMonth() {
-        return yearMonth;
+        return date;
     }
 
-    public void setYearMonth(Date yearMonth) {
-        this.yearMonth = yearMonth;
+    public void setYearMonth(Date date) {
+        this.date = date;
     }
 
     public BigDecimal getMoney() { return money; }
 
     public void setMoney(BigDecimal money) {
         this.money = money;
-    }
-
-    public String getMonth(){
-        return Converters.monthFormat.format(getYearMonth());
     }
 }

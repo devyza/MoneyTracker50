@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Dao
-public interface RecordsByCategoryDAO {
+public interface RecordsByCategoryDao {
     @Query("SELECT CASE WHEN C.name IS 'None' THEN 'Other' ELSE C.name END AS category, " +
             "SUM(R.amount) AS money " +
             "FROM records R " +
