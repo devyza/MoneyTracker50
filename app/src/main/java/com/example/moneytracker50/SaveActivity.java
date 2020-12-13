@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -89,7 +88,15 @@ public class SaveActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 database.recordDao().addRecord(record);
-                Toast.makeText(SaveActivity.this, "Saving Completed", Toast.LENGTH_SHORT).show();
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_CANCELED);
                 finish();
             }
         });

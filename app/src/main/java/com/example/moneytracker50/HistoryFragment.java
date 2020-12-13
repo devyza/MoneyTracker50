@@ -47,7 +47,6 @@ public class HistoryFragment extends Fragment {
             public void onClick(View v) {
                 calendar = Calendar.getInstance();
                 txtMonth.setText(Formatter.formatMonthYear(calendar.getTime()));
-                recordAdapter.reload(getContext(), calendar.getTime());
             }
         });
 
@@ -57,7 +56,6 @@ public class HistoryFragment extends Fragment {
             public void onClick(View v) {
                 calendar.add(Calendar.MONTH, 1);
                 txtMonth.setText(Formatter.formatMonthYear(calendar.getTime()));
-                recordAdapter.reload(getContext(), calendar.getTime());
             }
         });
 
@@ -67,7 +65,6 @@ public class HistoryFragment extends Fragment {
             public void onClick(View v) {
                 calendar.add(Calendar.MONTH, -1);
                 txtMonth.setText(Formatter.formatMonthYear(calendar.getTime()));
-                recordAdapter.reload(getContext(), calendar.getTime());
             }
         });
 
@@ -77,6 +74,10 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    public void reload(){
         recordAdapter.reload(getContext(), calendar.getTime());
     }
+
 }

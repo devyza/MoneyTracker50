@@ -105,8 +105,6 @@ public class AnalyticsFragment extends Fragment {
         pieChart_expense = view.findViewById(R.id.mp_PieChart_expense);
         pieChart_expense.invalidate();
 
-        reloadAll();
-
         return view;
     }
 

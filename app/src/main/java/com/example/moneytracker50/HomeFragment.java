@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SaveActivity.class);
                 intent.putExtra("isIncome", true);
-                v.getContext().startActivity(intent);
+                startActivityForResult(intent, 1001);
             }
         });
 
@@ -45,17 +45,11 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SaveActivity.class);
                 intent.putExtra("isIncome", false);
-                v.getContext().startActivity(intent);
+                startActivityForResult(intent, 1001);
             }
         });
 
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        reloadBalance();
     }
 
     public void reloadBalance(){

@@ -1,12 +1,17 @@
 package com.example.moneytracker50;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -59,6 +64,23 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    protected void onStart() {
+        super.onStart();
+        reload();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            reload();
+            Toast.makeText(this, "Saving Complete", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     void insertDefaultCategory() {
         String[] category = {
                 "None", "Cloth", "Debt", "Entertainment", "Food",
@@ -67,6 +89,13 @@ public class MainActivity extends AppCompatActivity {
 
         for (String i : category)
             recordDatabase.categoryDao().addCategory(new Category(i));
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void reload(){
+        mainFragment.reloadBalance();
+        historyFragment.reload();
+        analyticsFragment.reloadAll();
     }
 
 }
