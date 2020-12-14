@@ -47,6 +47,7 @@ public class HistoryFragment extends Fragment {
             public void onClick(View v) {
                 calendar = Calendar.getInstance();
                 txtMonth.setText(Formatter.formatMonthYear(calendar.getTime()));
+                reload();
             }
         });
 
@@ -56,6 +57,7 @@ public class HistoryFragment extends Fragment {
             public void onClick(View v) {
                 calendar.add(Calendar.MONTH, 1);
                 txtMonth.setText(Formatter.formatMonthYear(calendar.getTime()));
+                reload();
             }
         });
 
@@ -65,6 +67,7 @@ public class HistoryFragment extends Fragment {
             public void onClick(View v) {
                 calendar.add(Calendar.MONTH, -1);
                 txtMonth.setText(Formatter.formatMonthYear(calendar.getTime()));
+                reload();
             }
         });
 

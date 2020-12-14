@@ -75,10 +75,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK){
-            reload();
-            Toast.makeText(this, "Saving Complete", Toast.LENGTH_SHORT).show();
-        }
+        if (resultCode == RESULT_OK) reload();
     }
 
     void insertDefaultCategory() {

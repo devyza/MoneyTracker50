@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -82,13 +83,13 @@ public class SaveActivity extends AppCompatActivity {
                             edtDescription.getText().toString(),
                             Formatter.parseDate(edtDate.getText().toString()),
                             new BigDecimal(edtAmount.getText().toString()).multiply(sign),
-                            database.categoryDao().getCategory(spnrCategory.getSelectedItemPosition() + 1)
-                    );
+                            (Category)spnrCategory.getSelectedItem());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 database.recordDao().addRecord(record);
                 setResult(RESULT_OK);
+                Toast.makeText(SaveActivity.this, "Saving Completed", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -100,6 +101,5 @@ public class SaveActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }

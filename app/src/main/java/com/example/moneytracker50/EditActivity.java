@@ -89,7 +89,7 @@ public class EditActivity extends AppCompatActivity {
                 }
                 recordDatabase.recordDao().updateRecord(record);
                 setResult(RESULT_OK);
-                Toast.makeText(EditActivity.this, "Record has ben Deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditActivity.this, "Record Has Been Updated", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -113,7 +113,7 @@ public class EditActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 RecordDatabase.getInstance(getApplicationContext()).recordDao().deleteRecord(savedRecord);
                 setResult(RESULT_OK);
-                Toast.makeText(EditActivity.this, "Record has been Deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditActivity.this, "Record Has Been Deleted", Toast.LENGTH_SHORT).show();
                 finish();
                 return false;
             }
