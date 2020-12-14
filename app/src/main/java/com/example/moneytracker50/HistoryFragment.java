@@ -33,7 +33,7 @@ public class HistoryFragment extends Fragment {
         btnsDate = view.findViewById(R.id.dateButtons);
 
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        recordAdapter = new RecordAdapter();
+        recordAdapter = new RecordAdapter(getActivity());
 
         recyclerView = view.findViewById(R.id.rcylHistory);
         recyclerView.setLayoutManager(linearLayoutManager);

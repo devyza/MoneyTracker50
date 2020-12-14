@@ -1,6 +1,8 @@
 package com.example.moneytracker50;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +19,12 @@ import java.util.List;
 
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordViewHolder> {
 
+    Context contextMain;
     private List<Record> recordList = new ArrayList<>();
+
+    public RecordAdapter(Context context){
+        this.contextMain = context;
+    }
 
     @NonNull
     @Override
@@ -55,9 +62,20 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
             dateTextView = itemView.findViewById(R.id.txtDate);
             amountTextView = itemView.findViewById(R.id.txtAmount);
             categoryTextView = itemView.findViewById(R.id.txtCategory);
+
+            containerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Record record = (Record) containerView.getTag();
+                    Intent intent = new Intent(v.getContext(), EditActivity.class);
+                    intent.putExtra("id", record.getId());
+                    ((Activity)contextMain).startActivityForResult(intent, 1002);
+                }
+            });
         }
 
         public void bind(Record record) {
+            containerView.setTag(record);
             descriptionTextView.setText(record.getDescription());
             dateTextView.setText(Formatter.formatDate(record.getDate()));
             amountTextView.setText(Formatter.formatMoney(record.getAmount()));
