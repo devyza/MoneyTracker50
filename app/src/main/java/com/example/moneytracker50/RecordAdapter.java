@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,9 +22,12 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
 
     Context contextMain;
     private List<Record> recordList = new ArrayList<>();
+    int green, red;
 
     public RecordAdapter(Context context){
         this.contextMain = context;
+        green = context.getResources().getColor(R.color.green);
+        red = context.getResources().getColor(R.color.red);
     }
 
     @NonNull
@@ -79,6 +83,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
             descriptionTextView.setText(record.getDescription());
             dateTextView.setText(Formatter.formatDate(record.getDate()));
             amountTextView.setText(Formatter.formatMoney(record.getAmount()));
+            amountTextView.setTextColor(record.getAmount().compareTo(new BigDecimal("0")) == 1 ? green : red);
             categoryTextView.setText(RecordDatabase
                     .getInstance(containerView.getContext())
                     .categoryDao().getCategory(record.getCategory_id()).getName()

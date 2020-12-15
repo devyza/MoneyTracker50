@@ -17,7 +17,7 @@ public class RecordPieChart extends PieChart {
     public RecordPieChart(Context context, AttributeSet attrs) {
         super(context, attrs);
         setRotationEnabled(false);
-        setExtraOffsets(0f, 40f, 0f, 0f);
+        setExtraOffsets(0f, 5f, 0f, 5f);
         getLegend().setWordWrapEnabled(true);
         getDescription().setEnabled(false);
     }

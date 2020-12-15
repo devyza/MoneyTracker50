@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:padding="10dp">
 
     <LinearLayout
@@ -13,46 +14,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Monthly Usage"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Income"
-                android:textSize="20dp"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Expense"
-                android:textSize="20dp"/>
-        </LinearLayout>
+            android:text="Income"
+            android:textSize="20dp" />
 
+        <com.example.moneytracker50.RecordPieChart
+            android:id="@+id/mp_PieChart_income"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:layout_weight="1"
+            android:text="Expense"
+            android:textSize="20dp" />
 
-            <com.example.moneytracker50.RecordPieChart
-                android:id="@+id/mp_PieChart_income"
-                android:layout_width="0dp"
-                android:layout_height="500dp"
-                android:layout_weight="1" />
+        <com.example.moneytracker50.RecordPieChart
+            android:id="@+id/mp_PieChart_expense"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
 
-            <com.example.moneytracker50.RecordPieChart
-                android:id="@+id/mp_PieChart_expense"
-                android:layout_width="0dp"
-                android:layout_height="500dp"
-                android:layout_weight="1" />
-        </LinearLayout>
 
         <include
             android:id="@+id/layout_month"
@@ -61,15 +47,15 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Yearly Usage"
             android:layout_marginTop="20dp"
-            android:textSize="30dp"/>
+            android:text="Yearly Usage"
+            android:textSize="25dp" />
 
         <com.example.moneytracker50.RecordBarChart
             android:id="@+id/barChart"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_height="200dp"
+            android:layout_marginBottom="20dp" />
 
         <include
             android:id="@+id/layout_year"

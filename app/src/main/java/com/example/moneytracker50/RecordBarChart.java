@@ -52,6 +52,7 @@ public class RecordBarChart extends BarChart {
             barEntries.add(new BarEntry(i, dataValues.getOrDefault(months[i], 0f)));
 
         setData(new BarData(new BarDataSet(barEntries, null)));
+        animateY(1200);
         notifyDataSetChanged();
     }
 }

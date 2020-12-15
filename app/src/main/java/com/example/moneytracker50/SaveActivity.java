@@ -36,6 +36,8 @@ public class SaveActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         isIncome = getIntent().getBooleanExtra("isIncome", true);
+        getSupportActionBar().setTitle(isIncome ? "Add Income" : "Add Expense");
+
         database = RecordDatabase.getInstance(SaveActivity.this);
         categories = RecordDatabase
                 .getInstance(getApplicationContext())

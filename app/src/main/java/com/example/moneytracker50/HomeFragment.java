@@ -1,7 +1,6 @@
 package com.example.moneytracker50;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +20,18 @@ public class HomeFragment extends Fragment {
     TextView txtBalance;
     Button btnIncome, btnExpense;
 
+    int green, red;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
         txtBalance = (TextView) view.findViewById(R.id.balance);
+
+        green = getResources().getColor(R.color.green);
+        red = getResources().getColor(R.color.red);
+
         reloadBalance();
 
         btnIncome = (Button) view.findViewById(R.id.btnIncome);
@@ -56,10 +61,8 @@ public class HomeFragment extends Fragment {
         BigDecimal mainBalance = RecordDatabase.getInstance(view.getContext()).recordDao().getAmount();
         if (mainBalance != null){
             txtBalance.setText(Formatter.formatMoney(mainBalance));
-            txtBalance.setTextColor(mainBalance.compareTo(new BigDecimal("0")) == 1 ? Color.GREEN : Color.RED);
+            txtBalance.setTextColor(mainBalance.compareTo(new BigDecimal("0")) == 1 ? green : red);
         }
-
-
     }
 
 }
