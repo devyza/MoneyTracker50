@@ -12,7 +12,7 @@ public interface RecordsByCategoryDao {
             "SUM(R.amount) AS money " +
             "FROM records R " +
             "LEFT OUTER JOIN category C ON C.id = R.category_id " +
-            "WHERE R.amount > 0 AND  strftime('%m %Y', date/1000, 'unixepoch') = strftime('%m %Y', :month/1000, 'unixepoch') " +
+            "WHERE R.amount > 0 AND  strftime('%m %Y', date/1000, 'unixepoch', 'localtime') = strftime('%m %Y', :month/1000, 'unixepoch', 'localtime') " +
             "GROUP BY C.id")
     List<RecordsByCategory> getIncomeByMonth(Date month);
 
@@ -20,7 +20,7 @@ public interface RecordsByCategoryDao {
             "SUM(R.amount) AS money " +
             "FROM records R " +
             "LEFT OUTER JOIN category C ON C.id = R.category_id " +
-            "WHERE R.amount < 0 AND strftime('%m %Y', date/1000, 'unixepoch') = strftime('%m %Y', :month/1000, 'unixepoch') " +
+            "WHERE R.amount < 0 AND strftime('%m %Y', date/1000, 'unixepoch', 'localtime') = strftime('%m %Y', :month/1000, 'unixepoch', 'localtime') " +
             "GROUP BY C.id")
     List<RecordsByCategory> getExpenseByMonth(Date month);
 

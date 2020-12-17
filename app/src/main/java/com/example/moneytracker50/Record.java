@@ -17,13 +17,13 @@ public class Record {
     @ColumnInfo(name = "description")
     private String description;
 
-    @ColumnInfo(name = "date")
+    @ColumnInfo(name = "date", index = true)
     private Date date;
 
     @ColumnInfo(name = "amount")
     private BigDecimal amount;
 
-    @ColumnInfo(name = "category_id")
+    @ColumnInfo(name = "category_id", index = true)
     private int category_id;
 
     public Record(int id, String description, Date date, BigDecimal amount, int category_id){
